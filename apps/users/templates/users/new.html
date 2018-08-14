@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" 
+   href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+  <link rel="stylesheet" type="text/css" 
+   href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+   {% load static %}
+   <link rel="stylesheet" href="{% static 'users/styles/style.css' %}">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Register or Create User</h1>
+    <div class="form-container">
+      {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <form action="{% url 'users:create' %}" method="post">
+        {% csrf_token %}
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="Vanilla Ice">
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="rmvw@vanillaice.com">
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="chocoice">
+        <label for="confirm">Confirm</label>
+        <input type="password" name="confirm">
+        <input type="submit" value="Create New User">
+      </form>
+    </div>
+  </div>
+</body>
+</html>

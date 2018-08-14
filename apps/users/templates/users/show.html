@@ -1,0 +1,13 @@
+{% extends './layout.html' %}
+{% block body %}
+<body>
+  <h1>This is our user show page</h1>
+  <a href="/">Home</a>
+  <ul>
+    <li>{{ name }}</li>
+    <li>{{ email }}</li>
+    <li>{{ permission_level }}</li>
+    <li>{{ request.session.users }}</li>
+  </ul>
+</body>
+{% endblock %}
