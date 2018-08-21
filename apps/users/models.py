@@ -33,6 +33,51 @@ class UserManager(models.Manager):
 
     return (True, user.id)
 
+  def login_user(self, form_data):
+    errors = []
+
+    try:
+      user = self.get(email=form_data['email'])
+      # check to see if passwords match
+      if not bcrypt.checkpw(form_data['password'].encode(), user.pw_hash.encode()):
+        errors.append('Username or password is invalid')
+        return (False, errors)
+      
+      return (True, user.id)
+    except:
+      errors.append('Username or password is invalid')
+      return (False, errors)
+
+  def validate_and_update_user(self, user_id, form_data):
+    errors = []
+
+    if len(form_data['name']) < 2:
+      errors.append('Name must be at least 2 characters')
+    if not EMAIL_REGEX.match(form_data['email']):
+      errors.append('Must use a valid email address')
+
+    if errors:
+      return (False, errors)
+
+    try:
+      user = self.get(id=user_id)
+      user.name = form_data['name']
+      user.email = form_data['email']
+      user.save()
+      return (True, user)
+    except:
+      errors.append("User doesn't exist")
+      return (False, errors)
+
+  def delete_user_by_id(self, user_id):
+    try:
+      user = self.get(id=user_id)
+      user.delete()
+      return True
+    except:
+      return False
+
+
 class User(models.Model):
   name = models.CharField(max_length=255)
   email = models.CharField(max_length=255)

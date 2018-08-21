@@ -14,15 +14,16 @@
 </head>
 <body>
   <div class="container">
-    <h1>Register or Create User</h1>
+    <h1>Login or Register</h1>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
     <div class="form-container">
-      {% if messages %}
-        <ul class="messages">
-          {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
+      <h2>Register</h2>
       <form action="{% url 'users:create' %}" method="post">
         {% csrf_token %}
         <label for="name">Name</label>
@@ -33,7 +34,18 @@
         <input type="password" name="password" placeholder="chocoice">
         <label for="confirm">Confirm</label>
         <input type="password" name="confirm">
-        <input type="submit" value="Create New User">
+        <input type="submit" value="Register">
+      </form>
+    </div>
+    <div class="form-container">
+      <h2>Login</h2>
+      <form action="{% url 'users:login' %}" method="post">
+        {% csrf_token %}
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="rmvw@vanillaice.com">
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="chocoice">
+        <input type="submit" value="Login">
       </form>
     </div>
   </div>

@@ -1,3 +1,9 @@
 h1 {
   color: blue;
 }
+
+.form-container {
+  display: inline-block;
+  vertical-align: top;
+  width: 45%;
+}

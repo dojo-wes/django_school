@@ -18,6 +18,8 @@
   <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+  <a href="{% url 'users:logout' %}" class="button">Logout</a>
+  <a href="{% url 'users:index' %}" class="button">Users Index</a>
   {% block body %}{% endblock %}
 </body>
 </html>

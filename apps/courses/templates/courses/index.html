@@ -1,0 +1,8 @@
+{% extends './layout.html' %}
+{% block body %}
+  <ul>
+    {% for course in courses %}
+      <li>{{ course.name }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

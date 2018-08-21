@@ -2,12 +2,29 @@
 {% block body %}
 <body>
   <h1>This is our user show page</h1>
-  <a href="/">Home</a>
-  <ul>
-    <li>{{ name }}</li>
-    <li>{{ email }}</li>
-    <li>{{ permission_level }}</li>
-    <li>{{ request.session.users }}</li>
-  </ul>
+  <div class="user-info">
+    <h2>User Info</h2>
+    <ul>
+      <li>{{ name }}</li>
+      <li>{{ email }}</li>
+      <li>{{ permission_level }}</li>
+    </ul>
+  </div>
+  <div class="courses-taught">
+    <h2>Courses Taught</h2>
+    <ul>
+      {% for course in courses_taught %}
+        <li>{{ course.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="enrolled-courses">
+    <h2>Enrolled Courses</h2>
+    <ul>
+      {% for course in enrolled_courses %}
+        <li>{{ course.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
 </body>
 {% endblock %}

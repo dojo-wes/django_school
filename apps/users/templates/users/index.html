@@ -14,7 +14,7 @@
     <tbody>
       {% for user in users %}
         <tr>
-          <td>{{ user.name }}</td>
+          <td><a href="{% url 'users:show' user_id=user.id %}">{{ user.name }}</a></td>
           <td>{{ user.email }}</td>
           <td>{{ user.permission_level }}</td>
           <td>
