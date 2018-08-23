@@ -1,5 +1,9 @@
 {% extends './layout.html' %}
 {% block title %}Users Index{% endblock %}
+{% block head %}
+  {% load static %}
+  <script src="{% static 'users/scripts/show.js' %}"></script>
+{% endblock %}
 {% block body %}
   <h1>Users Index</h1>
   <table>
@@ -14,7 +18,7 @@
     <tbody>
       {% for user in users %}
         <tr>
-          <td><a href="{% url 'users:show' user_id=user.id %}">{{ user.name }}</a></td>
+          <td><a class="show" href="{% url 'users:show' user_id=user.id %}">{{ user.name }}</a></td>
           <td>{{ user.email }}</td>
           <td>{{ user.permission_level }}</td>
           <td>

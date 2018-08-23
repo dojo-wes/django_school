@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
+from django.core import serializers
 from .models import User
+
+import json
 
 
 # Create your views here.
@@ -59,10 +62,12 @@ def show(req, user_id):
     'name': user.name,
     'email': user.email,
     'permission_level': user.permission_level,
-    'courses_taught': user.courses_taught.all(),
-    'enrolled_courses': user.enrolled_courses.all()
+    'courses_taught': serializers.serialize("json",user.courses_taught.all()),
+    'enrolled_courses': serializers.serialize("json",user.enrolled_courses.all())
   }
-  return render(req, 'users/show.html', context)
+
+  json_data = json.dumps(context)
+  return HttpResponse(json_data, content_type="application/json", status=200)
 
 def edit(req, user_id):
   if 'user_id' not in req.session:
